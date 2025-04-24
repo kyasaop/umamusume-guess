@@ -3997,15 +3997,18 @@
       });
     }
 
-    function checkAnswer() {
-      const input = document.getElementById("userInput").value.trim();
-      const names = Array.isArray(answer.name_zh) ? answer.name_zh : [answer.name_zh];
-      const match = names.some(name => name.startsWith(input));
+  const answer = characters[Math.floor(Math.random() * characters.length)];
 
-      resultBox.textContent = match ? `🎉 答對了！正解是「${names[0]}」` : "猜錯了，再試一次！";
-      resultBox.className = match ? "result green" : "result red";
-    }
+  function checkAnswer() {
+    const input = document.getElementById("userInput").value.trim();
 
+    // 支援多個名字比對
+    const names = Array.isArray(answer.name_zh) ? answer.name_zh : [answer.name_zh];
+    const match = names.some(name => name.startsWith(input));
+
+    const resultBox = document.getElementById("result");
+    resultBox.textContent = match ? `🎉 答對了！正解是「${names[0]}」` : "猜錯了，再試一次！";
+    resultBox.className = match ? "result green" : "result red";
     renderHints();
   </script>
 </body>
